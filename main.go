@@ -1,4 +1,4 @@
-package TimeseriesGrpcStreaming
+package main
 
 import (
 	"github.com/dmdv/timeseriesgrpcstreaming/cmd"
