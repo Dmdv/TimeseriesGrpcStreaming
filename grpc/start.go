@@ -1,4 +1,0 @@
-package grpc
-
-func Start() {
-}
