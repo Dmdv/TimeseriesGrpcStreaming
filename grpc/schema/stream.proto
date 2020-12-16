@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+import "google/protobuf/timestamp.proto";
+
 package stream;
 
 option go_package = ".;stream";
@@ -10,7 +12,8 @@ message Request {
 
 message Data {
   int32 sequence = 1;
-  bytes data = 2;
+  google.protobuf.Timestamp timestamp = 2;
+  float value = 3;
 }
 
 service Streamer {
