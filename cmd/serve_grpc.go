@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	//"github.com/dmdv/TimeseriesGrpcStreaming/grpc"
+	"github.com/dmdv/timeseriesgrpcstreaming/grpc"
 	"github.com/spf13/cobra"
 )
 
@@ -10,6 +10,6 @@ var ServeGRPCCmd = &cobra.Command{
 	Aliases: []string{"grpc"},
 	Short:   "Start grpc server",
 	Run: func(cmd *cobra.Command, args []string) {
-		//grpc.Start()
+		grpc.Start()
 	},
 }
