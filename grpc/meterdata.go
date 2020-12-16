@@ -24,10 +24,17 @@ func (s* Server) StreamData(_ *stream.Request, srv stream.MeterStreamer_StreamDa
 		valueString := a[1]
 
 		timestamp, err := time.Parse("2006-02-01 15:04:05", timeString)
+		if err != nil {
+			log.Warn().Msg("Failed to parse: " + timeString)
+		}
 		timeProto, err := proto.TimestampProto(timestamp)
+		if err != nil {
+			log.Warn().Msg("Failed to parse: " + timestamp.String())
+		}
 		value, err := strconv.ParseFloat(valueString, 64)
-
-		// TODO: err
+		if err != nil {
+			log.Warn().Msg("Failed to parse: " + valueString)
+		}
 
 		err = srv.Send(&stream.Data{
 			Sequence:  int32(i),
