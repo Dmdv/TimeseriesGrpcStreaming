@@ -13,7 +13,7 @@ import (
 
 func (s* Server) StreamData(_ *stream.Request, srv stream.MeterStreamer_StreamDataServer) error {
 
-	meterData, err := ReadCsv("db/seed/images.csv")
+	meterData, err := ReadCsv("meterusage.csv")
 	if err != nil {
 		log.Fatal().Err(err).Send()
 	}
