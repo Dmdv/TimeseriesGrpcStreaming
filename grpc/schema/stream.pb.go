@@ -155,12 +155,12 @@ var file_stream_proto_rawDesc = []byte{
 	0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x54, 0x69, 0x6d, 0x65,
 	0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70,
 	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x02, 0x52,
-	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0x37, 0x0a, 0x08, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d,
-	0x65, 0x72, 0x12, 0x2b, 0x0a, 0x06, 0x53, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x12, 0x0f, 0x2e, 0x73,
-	0x74, 0x72, 0x65, 0x61, 0x6d, 0x2e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0c, 0x2e,
-	0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x2e, 0x44, 0x61, 0x74, 0x61, 0x22, 0x00, 0x30, 0x01, 0x42,
-	0x0a, 0x5a, 0x08, 0x2e, 0x3b, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x32, 0x40, 0x0a, 0x0d, 0x4d, 0x65, 0x74, 0x65, 0x72, 0x53,
+	0x74, 0x72, 0x65, 0x61, 0x6d, 0x65, 0x72, 0x12, 0x2f, 0x0a, 0x0a, 0x53, 0x74, 0x72, 0x65, 0x61,
+	0x6d, 0x44, 0x61, 0x74, 0x61, 0x12, 0x0f, 0x2e, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x2e, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x0c, 0x2e, 0x73, 0x74, 0x72, 0x65, 0x61, 0x6d, 0x2e,
+	0x44, 0x61, 0x74, 0x61, 0x22, 0x00, 0x30, 0x01, 0x42, 0x0a, 0x5a, 0x08, 0x2e, 0x3b, 0x73, 0x74,
+	0x72, 0x65, 0x61, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -183,8 +183,8 @@ var file_stream_proto_goTypes = []interface{}{
 }
 var file_stream_proto_depIdxs = []int32{
 	2, // 0: stream.Data.timestamp:type_name -> google.protobuf.Timestamp
-	0, // 1: stream.Streamer.Stream:input_type -> stream.Request
-	1, // 2: stream.Streamer.Stream:output_type -> stream.Data
+	0, // 1: stream.MeterStreamer.StreamData:input_type -> stream.Request
+	1, // 2: stream.MeterStreamer.StreamData:output_type -> stream.Data
 	2, // [2:3] is the sub-list for method output_type
 	1, // [1:2] is the sub-list for method input_type
 	1, // [1:1] is the sub-list for extension type_name
@@ -251,27 +251,27 @@ var _ grpc.ClientConnInterface
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion6
 
-// StreamerClient is the client API for Streamer service.
+// MeterStreamerClient is the client API for MeterStreamer service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
-type StreamerClient interface {
-	Stream(ctx context.Context, in *Request, opts ...grpc.CallOption) (Streamer_StreamClient, error)
+type MeterStreamerClient interface {
+	StreamData(ctx context.Context, in *Request, opts ...grpc.CallOption) (MeterStreamer_StreamDataClient, error)
 }
 
-type streamerClient struct {
+type meterStreamerClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewStreamerClient(cc grpc.ClientConnInterface) StreamerClient {
-	return &streamerClient{cc}
+func NewMeterStreamerClient(cc grpc.ClientConnInterface) MeterStreamerClient {
+	return &meterStreamerClient{cc}
 }
 
-func (c *streamerClient) Stream(ctx context.Context, in *Request, opts ...grpc.CallOption) (Streamer_StreamClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_Streamer_serviceDesc.Streams[0], "/stream.Streamer/Stream", opts...)
+func (c *meterStreamerClient) StreamData(ctx context.Context, in *Request, opts ...grpc.CallOption) (MeterStreamer_StreamDataClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_MeterStreamer_serviceDesc.Streams[0], "/stream.MeterStreamer/StreamData", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &streamerStreamClient{stream}
+	x := &meterStreamerStreamDataClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -281,16 +281,16 @@ func (c *streamerClient) Stream(ctx context.Context, in *Request, opts ...grpc.C
 	return x, nil
 }
 
-type Streamer_StreamClient interface {
+type MeterStreamer_StreamDataClient interface {
 	Recv() (*Data, error)
 	grpc.ClientStream
 }
 
-type streamerStreamClient struct {
+type meterStreamerStreamDataClient struct {
 	grpc.ClientStream
 }
 
-func (x *streamerStreamClient) Recv() (*Data, error) {
+func (x *meterStreamerStreamDataClient) Recv() (*Data, error) {
 	m := new(Data)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -298,52 +298,52 @@ func (x *streamerStreamClient) Recv() (*Data, error) {
 	return m, nil
 }
 
-// StreamerServer is the server API for Streamer service.
-type StreamerServer interface {
-	Stream(*Request, Streamer_StreamServer) error
+// MeterStreamerServer is the server API for MeterStreamer service.
+type MeterStreamerServer interface {
+	StreamData(*Request, MeterStreamer_StreamDataServer) error
 }
 
-// UnimplementedStreamerServer can be embedded to have forward compatible implementations.
-type UnimplementedStreamerServer struct {
+// UnimplementedMeterStreamerServer can be embedded to have forward compatible implementations.
+type UnimplementedMeterStreamerServer struct {
 }
 
-func (*UnimplementedStreamerServer) Stream(*Request, Streamer_StreamServer) error {
-	return status.Errorf(codes.Unimplemented, "method Stream not implemented")
+func (*UnimplementedMeterStreamerServer) StreamData(*Request, MeterStreamer_StreamDataServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamData not implemented")
 }
 
-func RegisterStreamerServer(s *grpc.Server, srv StreamerServer) {
-	s.RegisterService(&_Streamer_serviceDesc, srv)
+func RegisterMeterStreamerServer(s *grpc.Server, srv MeterStreamerServer) {
+	s.RegisterService(&_MeterStreamer_serviceDesc, srv)
 }
 
-func _Streamer_Stream_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _MeterStreamer_StreamData_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(Request)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(StreamerServer).Stream(m, &streamerStreamServer{stream})
+	return srv.(MeterStreamerServer).StreamData(m, &meterStreamerStreamDataServer{stream})
 }
 
-type Streamer_StreamServer interface {
+type MeterStreamer_StreamDataServer interface {
 	Send(*Data) error
 	grpc.ServerStream
 }
 
-type streamerStreamServer struct {
+type meterStreamerStreamDataServer struct {
 	grpc.ServerStream
 }
 
-func (x *streamerStreamServer) Send(m *Data) error {
+func (x *meterStreamerStreamDataServer) Send(m *Data) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-var _Streamer_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "stream.Streamer",
-	HandlerType: (*StreamerServer)(nil),
+var _MeterStreamer_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "stream.MeterStreamer",
+	HandlerType: (*MeterStreamerServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "Stream",
-			Handler:       _Streamer_Stream_Handler,
+			StreamName:    "StreamData",
+			Handler:       _MeterStreamer_StreamData_Handler,
 			ServerStreams: true,
 		},
 	},

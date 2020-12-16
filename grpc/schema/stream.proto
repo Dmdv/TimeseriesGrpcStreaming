@@ -16,7 +16,7 @@ message Data {
   float value = 3;
 }
 
-service Streamer {
-  rpc Stream (Request) returns (stream Data) {
+service MeterStreamer {
+  rpc StreamData (Request) returns (stream Data) {
   }
 }

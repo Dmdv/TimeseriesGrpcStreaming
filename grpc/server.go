@@ -10,7 +10,7 @@ import (
 )
 
 type Server struct {
-	stream.UnimplementedStreamerServer
+	stream.UnimplementedMeterStreamerServer
 }
 
 
@@ -24,7 +24,7 @@ func Start() {
 
 	s := grpc.NewServer()
 
-	stream.RegisterStreamerServer(s, &Server{
+	stream.RegisterMeterStreamerServer(s, &Server{
 	})
 
 	if err := s.Serve(lis); err != nil {
