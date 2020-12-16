@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package stream;
+
+message Request {
+  string id = 1;
+}
+
+message Data {
+  int32 sequence = 1;
+  bytes data = 2;
+}
+
+service Streamer {
+  rpc Stream (Request) returns (stream Data) {
+  }
+}

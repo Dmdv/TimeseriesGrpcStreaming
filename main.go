@@ -1,0 +1,4 @@
+package TimeseriesGrpcStreaming
+
+func main()  {
+}
