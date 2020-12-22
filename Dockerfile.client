@@ -1,0 +1,39 @@
+###
+# Multistage build. Builder phase
+###
+
+FROM golang:1.14-alpine AS builder
+
+# git is required for some go modules
+RUN apk --no-cache add ca-certificates git
+
+WORKDIR /app
+
+ARG GITHUB_TOKEN
+ENV GO111MODULE=on
+
+COPY go.mod .
+COPY go.sum .
+
+# Install dependencies only when it's needed
+RUN go mod download
+
+COPY . .
+
+RUN go build -o times
+
+###
+# Multistage build. Target phase
+###
+
+FROM alpine:latest
+
+RUN apk --no-cache add ca-certificates
+
+WORKDIR /app
+
+# To copy configs
+COPY . .
+COPY --from=builder /app/times .
+
+CMD ["/app/times", "serve-grpc"]

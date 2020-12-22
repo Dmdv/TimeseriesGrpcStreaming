@@ -13,8 +13,8 @@ type Server struct {
 	stream.UnimplementedMeterStreamerServer
 }
 
-
 func Start() {
+
 	StartUp()
 
 	lis, err := net.Listen("tcp", viper.GetString("grpc.listen"))

@@ -1,4 +1,4 @@
-package common
+package initializers
 
 import (
 	"github.com/dmdv/timeseriesgrpcstreaming/models"

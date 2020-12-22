@@ -1,9 +1,11 @@
 package grpc
 
-import "github.com/dmdv/timeseriesgrpcstreaming/web/common"
+import (
+	"github.com/dmdv/timeseriesgrpcstreaming/app/initializers"
+)
 
 func StartUp() {
-	common.InitConfig()
+	initializers.InitConfig()
 }
 
 func Stop() {
